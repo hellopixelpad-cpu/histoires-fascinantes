@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Connexion TikTok – Histoires fascinantes</title><link rel="stylesheet" href="../style.css"></head><body>
+<h1>Connexion TikTok</h1>
+<p id="msg">Autorisation reçue. Termine la connexion :</p>
+<p><a class="btn" id="go" href="#">Envoyer au serveur</a><button id="copy">Copier l'adresse</button></p>
+<p><small>Le bouton fonctionne si cet appareil est connecté à Tailscale. Sinon, copie l'adresse et colle-la sur la page /tiktok du serveur.</small></p>
+<div class="box" id="url"></div>
+<script>
+const SERVER = "http://100.124.34.44:8001";
+const u = location.href;
+document.getElementById("url").textContent = u;
+document.getElementById("go").href = SERVER + "/tiktok/connect?url=" + encodeURIComponent(u);
+document.getElementById("copy").onclick = () => navigator.clipboard.writeText(u);
+if (!new URLSearchParams(location.search).get("code")) document.getElementById("msg").textContent = "Aucun code d'autorisation dans l'adresse.";
+</script>
+</body></html>
